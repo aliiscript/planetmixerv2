@@ -72,13 +72,22 @@ const nextConfig = {
 };
 
 const withPlugins = require("next-compose-plugins");
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true',
-})
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+    enabled: process.env.ANALYZE === "true",
+});
 const withImages = require("next-images");
 const { default: next } = require("next");
 const { watch } = require("fs");
 
-module.exports = withPlugins([withImages, withBundleAnalyzer], {sassOptions: {
-    includePaths: [path.join(__dirname, 'styles')],
-  },}, nextConfig);
+module.exports = withPlugins(
+    [withImages, withBundleAnalyzer],
+    {
+        sassOptions: {
+            includePaths: [path.join(__dirname, "styles")],
+        },
+        images: {
+            disableStaticImages: true,
+        },
+    },
+    nextConfig
+);

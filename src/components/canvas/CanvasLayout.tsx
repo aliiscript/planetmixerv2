@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { Perf } from "r3f-perf";
 import styled from 'styled-components';
+import * as THREE from "three";
 
 interface CanvasLayoutProps {
     children: ReactNode
@@ -69,10 +70,16 @@ function CanvasLayout({ children }: CanvasLayoutProps) {
                 }}
                 // pixelRatio={pixelRatio}
                 camera={{
-                    position: [0, 0, 3],
+                    position: [0, 0, 44],
                     aspect: aspectRatio,
-                    near: 0.1,
+                    near: 1,
                     far: 100,
+                }}
+                dpr={[1, 2]}
+                gl={{antialias: true}}
+                onCreated={(canvasCtx) => {
+                    canvasCtx.gl.toneMapping = THREE.ACESFilmicToneMapping;
+                    canvasCtx.gl.shadowMap.type = THREE.PCFShadowMap;
                 }}
             >
                 {children}

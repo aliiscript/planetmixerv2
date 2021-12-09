@@ -3,6 +3,7 @@ import Scene from "../components/scenes/index";
 import CanvasLayout from "../components/canvas/index";
 import Layout from "../components/layout/index";
 import GlobalStyles from "../components/GlobalStyles";
+import { Suspense } from "react";
 
 export default function Home() {
     const { color, hoverColor } = useControls({
@@ -14,7 +15,9 @@ export default function Home() {
         <>
             <Layout title={"First"}>
                 <CanvasLayout>
-                    <Scene color={color} hoverColor={hoverColor} />
+                    <Suspense fallback={null}>
+                        <Scene />
+                    </Suspense>
                 </CanvasLayout>
             </Layout>
             <GlobalStyles />
